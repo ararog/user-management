@@ -40,10 +40,6 @@ RUN apt-get update -y && \
 
 COPY --from=builder ["${SOURCE_DIR}/public", "./public"]
 
-# Set the correct permission for prerender cache
-RUN mkdir .next && \
-  chown nextjs:nodejs .next
-
 EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
