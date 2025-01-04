@@ -1,28 +1,46 @@
-
 .body {
   font-family: 'Roboto';
 }
 
 .h1 {
-  color: blue
+  color: 'blue'
 }
 
 .menu {
+
+}
+
+.form {
+  flex-direction: column;  
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+}
+
+.entry {
   flex-direction: column;
   padding: 1rem;
 }
 
-.userItem {
-  list-style-type: none;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  cursor: pointer;
+.label {
+  width: 100px;
 }
 
-.actions {
-  background-color: green;
-  padding: 1rem;
-  text-align: center;
+.input {
+  height: 30px;
+  width: 400px;
+}
+
+.message {
+  list-style-type: none;
+  color: red;
+}
+
+.button {
+  margin-top: 2rem;
+  width: 9rem;
+  height: 3rem;
+  background-color: blue;
 }
 
 .page {
