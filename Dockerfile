@@ -17,7 +17,7 @@ RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install
 RUN rm  -rf build  && \
   rm -rf release  && \ 
   mkdir release  && \
-  mv api.env .env && \
+  mv app.env .env && \
   pnpm run build && \
   tar czvf release/app.tar.gz -C build/ .
 

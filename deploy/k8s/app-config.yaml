@@ -4,6 +4,8 @@ metadata:
   name: user-management-config
   namespace: default
 data:
-  REACT_APP_AUTH0_DOMAIN: "ararog.us.auth0.com"
-  REACT_APP_AUTH0_CLIENT_ID: "28Ad1AnxNZTXgLuzfeg670CrA3zGAhlk"
-  REACT_APP_AUTH0_CALLBACK_URL: "http://localhost:3000/callback"
+  API_URL: http://localhost:3000
+  DB_HOST: 192.168.1.9
+  DB_NAME: lilium
+  DB_USERNAME: postgres
+  DB_PASSWORD: jdvRojIPlH
