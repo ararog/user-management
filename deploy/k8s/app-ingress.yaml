@@ -18,4 +18,14 @@ spec:
           service:
             name: user-management-web-svc
             port:
-              number: 80  
+              number: 80
+  - host: "app.usermanagement.training"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: user-management-web-svc
+            port:
+              number: 80                
