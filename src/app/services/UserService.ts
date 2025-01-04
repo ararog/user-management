@@ -1,6 +1,6 @@
 import { AppDataSource } from '@/database';
 import { generatePassword } from '@/helpers/password';
-import { User } from "../models/User";
+import { User } from "@/models/User";
 
 export class NotFoundError extends Error {
   constructor(msg: string) {

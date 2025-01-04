@@ -4,7 +4,6 @@ import { User } from "@/models/User";
 import { NewUserSchema } from "@/helpers/validation";
 import { ZodError } from "zod";
 
-
 export async function GET() {
   try {
     const users: User[] = await loadUsers();

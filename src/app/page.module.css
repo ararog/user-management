@@ -13,9 +13,19 @@
 }
 
 .userItem {
+  width: 200px;
   list-style-type: none;
   margin-left: 1rem;
-  margin-right: 1rem;
+  margin-right: 3rem;
+  background-color: 'blue';
+  cursor: pointer;
+}
+
+.actionItem {
+  list-style-type: none;
+  margin-left: 0.4rem;
+  margin-right: 0.5rem;
+  background-color: 'yellow';
   cursor: pointer;
 }
 

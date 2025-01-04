@@ -1,17 +1,18 @@
-import { User } from '@/models/User';
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
+import { Permission } from '../models/Permission';
+import { User } from '../models/User';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
-  host: '192.168.1.9',
+  host: process.env.DB_HOST || 'localhost',
   port: 5432,
-  database: 'lilium',
-  username: 'postgres',
-  password: 'jdvRojIPlH',
+  database: process.env.DB_NAME || 'lilium',
+  username: process.env.DB_USERNAME || 'lilium',
+  password: process.env.DB_PASSWORD || 'lilium',
   synchronize: true,
   logging: true,
-  entities: [User],
+  entities: [User, Permission],
   migrations: [],
   subscribers: [],
 });
