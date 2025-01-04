@@ -25,6 +25,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    sh "mv app.env .env"
                     sh "docker build -t ${env.BASE_IMAGE} --target builder ."
                 }
             }
