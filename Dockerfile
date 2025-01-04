@@ -25,7 +25,7 @@ WORKDIR "$SOURCE_DIR"
 
 RUN npm run test
 
-FROM base AS runtime
+FROM builder AS runtime
 
 ARG SOURCE_DIR
 
