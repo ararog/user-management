@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: user-management-rollout
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: user-management
+  template:
+    metadata:
+      labels:
+        app: user-management
+    spec:
+      containers:
+      - name: user-management-container
+        image: registry.local:5000/training/user-management:latest
+        env:
+          - name: DB_HOST
+            valueFrom: 
+              configMapKeyRef:
+                name: user-management-config
+                key: DB_HOST          
+          - name: DB_NAME
+            valueFrom: 
+              configMapKeyRef:
+                name: user-management-config
+                key: DB_USERNAME         
+          - name: DB_USERNAME
+            valueFrom: 
+              configMapKeyRef:
+                name: user-management-config
+                key: DB_USERNAME         
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: user-management-secret
+                key: DB_PASSWORD                
+        ports:
+        - containerPort: 80
+  strategy:
+    blueGreen: 
+      activeService: user-management-svc
+      previewService: user-management-blue-svc
+      autoPromotionEnabled: true
+      autoPromotionSeconds: 30

@@ -2,6 +2,12 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+NOTE: You must create database first, once you do this, please create a .env file, 
+see app.env as an example.
+
+Dockefile, Jenkinsfile, docker-compose.yml and k8s manifests are included, but not tested,
+minor changes might be required.
+
 First, run the development server:
 
 ```bash

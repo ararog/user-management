@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-management-svc
+  labels:
+    app: user-management
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+  selector:
+    app: user-management
+
+---    
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-management-blue-svc
+  labels:
+    app: user-management
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+  selector:
+    app: user-management
