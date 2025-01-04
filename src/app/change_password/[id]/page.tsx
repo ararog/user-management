@@ -4,6 +4,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { FormEvent, useState } from 'react';
 import styles from "./page.module.css";
 import { ValidationErrors } from '@/types';
+import { apiClient } from '@/helpers/api';
 
 export default function ChangePassword() {
   const [errors, setErrors] = useState<ValidationErrors>();
@@ -14,7 +15,7 @@ export default function ChangePassword() {
     event.preventDefault()
  
     const formData = new FormData(event.currentTarget)
-    const response = await fetch(`/api/users/${params?.id}/password`, {
+    const response = await apiClient(`/api/users/${params?.id}/password`, {
       method: 'PUT',
       body: JSON.stringify(Object.fromEntries(formData)),
     })

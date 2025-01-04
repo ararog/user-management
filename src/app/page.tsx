@@ -7,13 +7,14 @@ import styles from "./page.module.css";
 import Link from 'next/link'
 import { User } from './models/User';
 import { useRouter } from 'next/navigation';
+import { apiClient } from './helpers/api';
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
   const router = useRouter();
 
   async function fetchUsers() {
-    const res = await fetch('http://localhost:3000/api/users')
+    const res = await apiClient('/api/users')
     const data = await res.json()
     setUsers(data)
   }
@@ -29,7 +30,7 @@ export default function Home() {
   const deleteItem = useCallback(async (id: number) => {
     const isConfirmed = confirm('Are you sure you want to delete this user?');
     if (isConfirmed) {
-      await fetch(`http://localhost:3000/api/users/${id}`, {
+      await apiClient(`/api/users/${id}`, {
         method: 'DELETE'
       });
 
