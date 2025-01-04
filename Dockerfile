@@ -25,18 +25,32 @@ WORKDIR "$SOURCE_DIR"
 
 RUN npm run test
 
-FROM nginx:stable AS runtime
-SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
+FROM base AS runtime
 
 ARG SOURCE_DIR
-COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/release/app.tar.gz",  "/app.tar.gz" ]
-#COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/config/default.conf.template", "/etc/nginx/templates/default.conf.template"]
 
-RUN mkdir /app
+WORKDIR "$SOURCE_DIR"
 
-RUN cp /app.tar.gz /usr/share/nginx/html && \
-  cd /usr/share/nginx/html && \
-  tar xzvf app.tar.gz && \
-  rm app.tar.gz && \
-  chown -R nginx:nginx .
+ENV NODE_ENV=production
 
+RUN apt-get update -y && \
+  apt-get install -y openssl && \
+  addgroup --system --gid 1001 nodejs && \
+  adduser --system --uid 1001 nextjs
+
+COPY --from=builder ["${SOURCE_DIR}/public", "./public"]
+
+# Set the correct permission for prerender cache
+RUN mkdir .next && \
+  chown nextjs:nodejs .next
+
+EXPOSE 3000
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/.next/standalone", "./"]
+COPY --from=builder --chown=nextjs:nodejs ["${SOURCE_DIR}/.next/static", "./.next/static"]
+
+CMD ["node", "server.js"]
