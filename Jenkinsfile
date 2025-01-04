@@ -25,7 +25,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh "docker build -t ${env.BASE_IMAGE} --target builder ."
+                    sh "docker build -t ${env.BASE_IMAGE}:${dockerImageTag} --target builder ."
                 }
             }
         }
@@ -39,15 +39,15 @@ pipeline {
         stage('Runtime') {
             steps {
                 script {
-                    sh "docker build -t ${env.BASE_IMAGE} --target runtime ."
+                    sh "docker build -t ${env.BASE_IMAGE}:${dockerImageTag} --target runtime ."
                 }
             }
         }
         stage('Publish') {
             steps {
                 script {
-                    sh "docker tag ${env.BASE_IMAGE} ${env.BASE_IMAGE}"
-                    sh "docker push ${env.BASE_IMAGE}"
+                    sh "docker tag ${env.BASE_IMAGE}:${dockerImageTag} ${env.BASE_IMAGE}:${dockerImageTag}"
+                    sh "docker push ${env.BASE_IMAGE}:${dockerImageTag}"
                 }
             }
         }
