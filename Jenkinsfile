@@ -25,7 +25,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh "docker buildx build -t ${env.BASE_IMAGE}:${dockerImageTag} --target builder ."
+                    sh "docker build -t ${env.BASE_IMAGE}:${dockerImageTag} --target builder ."
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
         stage('Runtime') {
             steps {
                 script {
-                    sh "docker buildx build -t ${env.BASE_IMAGE}:${dockerImageTag} --target runtime ."
+                    sh "docker build -t ${env.BASE_IMAGE}:${dockerImageTag} --target runtime ."
                 }
             }
         }
@@ -53,7 +53,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                withKubeConfig([credentialsId: 'minikube', serverUrl: 'https://192.168.49.2:8443']){
+                withKubeConfig([credentialsId: 'minikube', serverUrl: 'https://minikube:8443']){
                     sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
                     sh 'chmod u+x ./kubectl'
                     sh 'curl -LO "https://github.com/argoproj/argo-rollouts/releases/latest/download/kubectl-argo-rollouts-linux-amd64"'
