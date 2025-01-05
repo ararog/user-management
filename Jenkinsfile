@@ -2,7 +2,13 @@
 def dockerImageTag = ""
 
 pipeline {
-    agent any
+    agent {
+      docker {
+        image 'training/kube-deploy:latest' 
+        registryUrl 'http://registry.local:5000'
+        args '--network=minikube'
+      }      
+    }
     environment {
         BASE_IMAGE = "registry.local:5000/training/user-management"
         CONTAINER = "user-management-container" 
@@ -54,12 +60,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 withKubeConfig([credentialsId: 'minikube', serverUrl: 'https://minikube:8443']){
-                    sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
-                    sh 'chmod u+x ./kubectl'
-                    sh 'curl -LO "https://github.com/argoproj/argo-rollouts/releases/latest/download/kubectl-argo-rollouts-linux-amd64"'
-                    sh 'mv ./kubectl-argo-rollouts-linux-amd64 ./kubectl-argo-rollouts && chmod u+x ./kubectl-argo-rollouts'                    
-                    sh "./kubectl apply -f deploy/k8s"
-                    sh "./kubectl argo rollouts set image user-management-rollout ${env.CONTAINER}=${env.BASE_IMAGE}:${dockerImageTag} -n default"
+                    sh "kubectl apply -f deploy/k8s"
+                    sh "kubectl argo rollouts set image user-management-rollout ${env.CONTAINER}=${env.BASE_IMAGE}:${dockerImageTag} -n default"
                 }
             }
         }        
