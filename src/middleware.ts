@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const allowedOrigins = [
+  'http://localhost:3000',
   'https://appusermanagementararog.loclx.io', 
   'https://app.usermanagement.training', 
   'http://microblog-prometheus.default.svc.cluster.local', 

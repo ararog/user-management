@@ -17,11 +17,11 @@ spec:
       - name: user-management-container
         image: registry.local:5000/training/user-management:latest
         env:
-          - name: API_URL
+          - name: NEXT_PUBLIC_API_URL
             valueFrom: 
               configMapKeyRef:
                 name: user-management-config
-                key: API_URL          
+                key: NEXT_PUBLIC_API_URL          
           - name: DB_HOST
             valueFrom: 
               configMapKeyRef:
