@@ -1,10 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, } from "typeorm"
 
 @Entity()
 export class Permission {
-    @PrimaryGeneratedColumn()
     id!: number
 
-    @Column()
     name!: string
 }
