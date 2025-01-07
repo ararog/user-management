@@ -56,8 +56,5 @@
   ],
   "exclude": [
     "node_modules",
-    "deploy",
-    "Jenkinsfile",
-    "Dockerfile"
   ]
 }
