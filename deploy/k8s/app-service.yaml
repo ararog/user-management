@@ -8,6 +8,7 @@ spec:
   type: LoadBalancer
   ports:
   - port: 80
+    targetPort: 3000
   selector:
     app: user-management
 
@@ -23,5 +24,6 @@ spec:
   type: LoadBalancer
   ports:
   - port: 80
+    targetPort: 3000
   selector:
     app: user-management
