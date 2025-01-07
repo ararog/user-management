@@ -4,7 +4,7 @@ metadata:
   name: user-management-config
   namespace: default
 data:
-  API_URL: http://app.usermanagement.training:3000
-  DB_HOST: todo-postgresql.default.svc.cluster.local
-  DB_NAME: lilium
-  DB_USERNAME: postgres
+  API_URL:
+  DB_HOST:
+  DB_NAME:
+  DB_USERNAME:
