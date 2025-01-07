@@ -14,7 +14,9 @@ ENV NEXT_PUBLIC_API_URL=${API_URL}
 
 WORKDIR "$SOURCE_DIR"
 
-RUN corepack enable
+RUN corepack enable pnpm && \
+  corepack use pnpm@9.15.0
+
 COPY . .
 RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --no-frozen-lockfile && \
   pnpm install --no-frozen-lockfile && \
