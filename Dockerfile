@@ -7,6 +7,7 @@ ARG SOURCE_DIR=/home/jenkins
 FROM node:${NODE_VERSION}-${DEBIAN_CODENAME} AS builder
 
 ARG SOURCE_DIR
+ARG API_URL
 
 WORKDIR "$SOURCE_DIR"
 
@@ -14,7 +15,7 @@ RUN corepack enable
 COPY . .
 RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --no-frozen-lockfile && \
   pnpm install --no-frozen-lockfile && \
-  pnpm run build
+  NEXT_PUBLIC_API_URL=${API_URL} pnpm run build
 
 FROM builder AS test
 

@@ -3,6 +3,9 @@ def dockerImageTag = ""
 
 pipeline {
     agent any
+    parameters {
+      choice(name: 'API_URL', choices: ['http://localhost:3000', 'https://appusermanagementararog.loclx.io/'], description: 'Server API Url')
+    }
     environment {
         BASE_IMAGE = "registry.local:5000/training/user-management"
         CONTAINER = "user-management-container" 
@@ -25,7 +28,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh "docker build -t ${env.BASE_IMAGE}:${dockerImageTag} --target builder ."
+                    sh "docker build -t ${env.BASE_IMAGE}:${dockerImageTag} --build-arg=API_URL=${params.API_URL} --target builder ."
                 }
             }
         }
@@ -58,7 +61,7 @@ pipeline {
                     sh 'chmod u+x ./kubectl'
                     sh 'curl -LO "https://github.com/argoproj/argo-rollouts/releases/latest/download/kubectl-argo-rollouts-linux-amd64"'
                     sh 'mv ./kubectl-argo-rollouts-linux-amd64 ./kubectl-argo-rollouts && chmod u+x ./kubectl-argo-rollouts'
-                    sh "./kubectl apply -f deploy/k8s -n default"
+                    //sh "./kubectl apply -f deploy/k8s -n default"
                     sh "PATH=. ./kubectl argo rollouts set image user-management-rollout ${env.CONTAINER}=${env.BASE_IMAGE}:${dockerImageTag} -n default"
                 }
             }
