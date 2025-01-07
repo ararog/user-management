@@ -2,7 +2,7 @@ import { Entity, } from "typeorm"
 
 @Entity()
 export class Permission {
-    id!: number
+    id: number
 
     name!: string
 }
