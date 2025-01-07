@@ -4,7 +4,7 @@ metadata:
   name: user-management-config
   namespace: default
 data:
-  API_URL:
-  DB_HOST:
-  DB_NAME:
-  DB_USERNAME:
+  API_URL: https://appusermanagementararog.loclx.io/
+  DB_HOST: todo-postgresql.default.svc.cluster.local
+  DB_NAME: lilium
+  DB_USERNAME: postgres
