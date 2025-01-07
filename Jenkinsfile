@@ -4,7 +4,7 @@ def dockerImageTag = ""
 pipeline {
     agent any
     parameters {
-      choice(name: 'API_URL', choices: ['http://localhost:3000', 'https://appusermanagementararog.loclx.io/'], description: 'Server API Url')
+      choice(name: 'API_URL', choices: ['http://localhost:3000', 'https://appusermanagementararog.loclx.io'], description: 'Server API Url')
     }
     environment {
         BASE_IMAGE = "registry.local:5000/training/user-management"
