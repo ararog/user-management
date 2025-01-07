@@ -16,7 +16,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: user-management-web-svc
+            name: user-management-svc
             port:
               number: 80
   - host: "app.usermanagement.training"
@@ -26,6 +26,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: user-management-web-svc
+            name: user-management-svc
             port:
               number: 80                
