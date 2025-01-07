@@ -5,26 +5,26 @@ import { Permission } from "@/models/Permission"
 @Unique(['email'])
 export class User {
     @PrimaryGeneratedColumn()
-    id!: number
+    id: number
 
     @Column()
-    name!: string
+    name: string
 
     @Column()
-    email!: string
+    email: string
 
-    password!: string
+    password: string
 
-    confirmPassword!: string
-
-    @Column()
-    salt!: string
+    confirmPassword: string
 
     @Column()
-    hash!: string
+    salt: string
+
+    @Column()
+    hash: string
 
     @ManyToMany(() => Permission)
     @JoinTable()
-    permissions!: Permission[]
+    permissions: Permission[]
 }
 
