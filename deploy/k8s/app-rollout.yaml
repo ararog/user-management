@@ -38,7 +38,7 @@ spec:
                 name: user-management-secret
                 key: DB_PASSWORD                
         ports:
-        - containerPort: 80
+        - containerPort: 3000
   strategy:
     blueGreen: 
       activeService: user-management-svc
