@@ -17,6 +17,11 @@ spec:
       - name: user-management-container
         image: registry.local:5000/training/user-management:latest
         env:
+          - name: API_URL
+            valueFrom: 
+              configMapKeyRef:
+                name: user-management-config
+                key: API_URL          
           - name: DB_HOST
             valueFrom: 
               configMapKeyRef:
@@ -26,7 +31,7 @@ spec:
             valueFrom: 
               configMapKeyRef:
                 name: user-management-config
-                key: DB_USERNAME         
+                key: DB_NAME         
           - name: DB_USERNAME
             valueFrom: 
               configMapKeyRef:
