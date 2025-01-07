@@ -9,13 +9,16 @@ FROM node:${NODE_VERSION}-${DEBIAN_CODENAME} AS builder
 ARG SOURCE_DIR
 ARG API_URL
 
+ENV NODE_ENV=production
+ENV NEXT_PUBLIC_API_URL=${API_URL}
+
 WORKDIR "$SOURCE_DIR"
 
 RUN corepack enable
 COPY . .
 RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --no-frozen-lockfile && \
   pnpm install --no-frozen-lockfile && \
-  NEXT_PUBLIC_API_URL=${API_URL} pnpm run build
+  pnpm run build
 
 FROM builder AS test
 
