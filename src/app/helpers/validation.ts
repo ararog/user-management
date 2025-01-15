@@ -1,8 +1,8 @@
 import { object, string } from "zod";
  
 export const NewUserSchema = object({
-  name: string({ required_error: "Email is required" })
-    .min(1, "Email is required"),
+  name: string({ required_error: "Name is required" })
+    .min(1, "Name is required"),
   email: string({ required_error: "Email is required" })
     .min(1, "Email is required")
     .email("Invalid email"),
