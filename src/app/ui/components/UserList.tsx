@@ -6,14 +6,7 @@ import { useRouter } from 'next/navigation';
 import { apiClient } from '@/helpers/api';
 import UserItem from '@/ui/components/UserItem';
 
-type UserListProps = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  itemStyle: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  itemActionStyle: any
-}
-
-export default function UserList(props: UserListProps) {
+export default function UserList() {
   const [users, setUsers] = useState<User[]>([]);
   const [deletingId, setDeletingId] = useState(0);
   const router = useRouter();
@@ -30,7 +23,7 @@ export default function UserList(props: UserListProps) {
   }, [])
 
   const updatePassword = useCallback((id: number) => {
-    router.push(`/user/change_password/${id}`);
+    router.push(`/user/password/change/${id}`);
   }, [users]);
 
   const deleteItem = useCallback(async (id: number) => {
@@ -48,13 +41,11 @@ export default function UserList(props: UserListProps) {
     <ul>
       {users?.length === 0 ? <div>No users</div> : users.map((user) => 
         <UserItem key={user.id} 
-          style={props.itemStyle}
-          actionStyle={props.itemActionStyle}
           deleting={user.id === deletingId}
           onUpdateClick={() => updatePassword(user.id)} updateIcon={faLock}
           onDeleteClick={() => deleteItem(user.id)} deleteIcon={faTrash}
         >
-          <div className={props.itemStyle}>{user.name}</div>
+          <div className="">{user.name}</div>
         </UserItem>
       )}
     </ul>

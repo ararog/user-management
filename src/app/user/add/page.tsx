@@ -1,44 +1,44 @@
 'use client'
 
-import styles from "./page.module.css";
 import { useActionState } from 'react';
 import { createUser } from "@/ui/actions/createUser";
-import ErrorMessages from "@/ui/components/ErrorMessages";
 import SubmitButton from "@/ui/components/SubmitButton";
+import FormField from "@/ui/components/FormField";
+import Page from '@/ui/components/Page';
+import Form from '@/ui/components/Form';
 
 export default function AddUser() {
   const [errors, formAction, pending] = useActionState(createUser, {});
 
   return (
-    <div className={styles.page}>
-      <h1 className={styles.h1}>Add User</h1>
-      <div className={styles.menu}>
-        <form action={formAction}>
-          <div className={styles.form}>
-            <div className={styles.entry}>
-              <p><label className={styles.label}>Name:</label></p>
-              <input className={styles.input} type="text" name="name" /> 
-              <ErrorMessages errors={errors?.name} style={styles.message} />
-            </div>
-            <div className={styles.entry}>
-              <p><label className={styles.label}>Email:</label></p>
-              <input className={styles.input} type="text" name="email" />
-              <ErrorMessages errors={errors?.email} style={styles.message} />
-            </div>
-            <div className={styles.entry}>
-              <p><label className={styles.label}>Password:</label></p> 
-              <input className={styles.input} type="password" name="password" />
-              <ErrorMessages errors={errors?.password} style={styles.message} />
-            </div>
-            <div className={styles.entry}>
-              <p><label className={styles.label}>Password Confirmation:</label></p> 
-              <input className={styles.input} type="password" name="confirmPassword" />
-              <ErrorMessages errors={errors?.confirmPassword} style={styles.message} />
-            </div>
-            <SubmitButton pending={pending} style={styles.button} text="Save" pendingText="Saving..." />
-          </div>
-        </form>
-      </div>
-    </div>
+    <Page title="Add User">
+      <Form action={formAction}>
+        <FormField 
+          label="Name:" 
+          name="name" 
+          type="text" 
+          errors={errors.name} 
+        />
+        <FormField 
+          label="Email:" 
+          name="email" 
+          type="text" 
+          errors={errors.emails} 
+        />
+        <FormField 
+          label="Password:" 
+          name="password" 
+          type="password" 
+          errors={errors.password} 
+        />
+        <FormField 
+          label="Password Confirmation:" 
+          name="confirmPassword" 
+          type="password" 
+          errors={errors.confirmPassword} 
+        />
+        <SubmitButton pending={pending} text="Save" pendingText="Saving..." />
+      </Form>
+    </Page>
   );
 }

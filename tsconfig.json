@@ -45,7 +45,8 @@
       "@/types/*": [
         "./src/app/types/*"
       ]
-    }
+    },
+    "noEmit": true
   },
   "include": [
     "**/*.ts",
@@ -55,6 +56,6 @@
     ".next/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
+    "node_modules"
   ]
 }

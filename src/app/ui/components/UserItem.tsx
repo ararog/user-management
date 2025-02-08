@@ -8,10 +8,6 @@ type UserItemProps = {
   onDeleteClick:  React.MouseEventHandler<SVGSVGElement>
   onUpdateClick:  React.MouseEventHandler<SVGSVGElement>
   deleting: boolean
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  style: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  actionStyle: any
   updateIcon: IconDefinition
   deleteIcon: IconDefinition
   children: ReactNode
@@ -21,15 +17,15 @@ const LoadingSpinner = () => <Image src="/spinner.png" alt='' width={20} height=
 
 export default function UserItem(props: UserItemProps) {
   return (
-    <div style={{display: 'flex', flexDirection: 'row', margin: '1rem'}}>
+    <div className='flex flex-row'>
       {props.children}
-      <div className={props.actionStyle}>
+      <div className="list-none ml-1.5 mr-2 bg-yellow-400 cursor-pointer">
         {props.deleting ? <LoadingSpinner /> :
           <FontAwesomeIcon  onClick={props.onUpdateClick} icon={props.updateIcon} color='white' />
         }
       </div>
-      <div className={props.actionStyle}>
-        <FontAwesomeIcon className={props.actionStyle} onClick={props.onDeleteClick} icon={props.deleteIcon} color='white' />
+      <div className="list-none ml-1.5 mr-2 bg-yellow-400 cursor-pointer">
+        <FontAwesomeIcon className="" onClick={props.onDeleteClick} icon={props.deleteIcon} color='white' />
       </div>
     </div>
   )
